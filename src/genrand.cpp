@@ -41,6 +41,17 @@ struct sRand{
 	char *str;
     struct sRand *next;
 };//*p_tail, *p_begin;
+void delete_list(sRand *p_begin)
+{
+    sRand *p = p_begin;
+    while (p != NULL) {
+        sRand *tmp;
+        tmp = p;
+        p = p->next;
+        free(tmp->str);
+        free(tmp);
+    }
+}
 void calccountinlist(sRand *p_begin)
 {
 	count_calc=true;
@@ -161,6 +172,7 @@ int main(int argc, char** argv) {
 			break;
 	}
 	fclose(f);
+	delete_list(p_begin);
 	//thread gen(gencharwhile,p_tail,p_begin);
 	//gen.detach();
 
